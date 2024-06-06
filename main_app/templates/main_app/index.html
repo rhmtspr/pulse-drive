@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load humanize %}
+
+{% block content %}
+
+<main class="!max-w-6xl !mx-auto !my-4 !px-4">
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+    {% for car in cars %}
+    <li class="">
+          <div class="!p-3 !bg-white rounded-xl !shadow-md">
+                <div class="flex justify-between items-center">
+                    <p class="mb-0 text-sm font-bold">{{ car.brand }}<br>{{ car.car_type }}</p>
+                    <p class="mb-0 text-sm">IDR {{ car.price|intcomma }}<span>/Day</span></p>
+                </div>
+            <div>
+                <a href="{% url "car_detail" car.id %}">
+                    <img src="{{ car.image.url }}" alt="">
+                </a>
+            </div>
+            {% if car.status == "available" %}
+            <span class="inline-block p-2 text-xs font-medium rounded-md bg-green-200">{{ car.status }}</span>
+            {% else %}
+            <span class="inline-block p-2 text-xs font-medium rounded-md bg-gray-200">{{ car.status }}</span>
+            {% endif %}
+            <hr>
+            <div class="flex justify-between items-center mb-4 text-sm">
+                    <span><i class="fa-solid fa-user fa-xl"></i> {{ car.capacity }} passangers </span>
+                    <span><i class="fa-solid fa-car fa-xl"></i> {{ car.transmission }} </span>
+            </div>
+            <div class="!flex !justify-between !items-center">
+                {% if car.status == "available" %}
+                <a style="text-decoration: none;" class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-rose-500 !rounded-md" href="{% url "create_transaction" car.id %}">Rent Now</a>
+                {% else %}
+                <a style="text-decoration: none;" class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-gray-500 !rounded-md" href="#">Rent</a>
+                {% endif %}
+            </div>
+          </div>
+      </li>
+    {% endfor %}
+  </ul>
+</main>
+
+{% endblock content %}

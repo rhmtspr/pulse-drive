@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+
+{% block content %}
+
+{% if transactions.count == 0 %}
+<main  class="flex flex-col justify-center items-center mt-4">
+    <h2>You hasn't made any transactions yet!</h2>
+    <hr class="w-80 text-rose-500">
+    <p>Go to home page to rent a car</p>
+    <a class="no-underline text-rose-500 font-medium" href="{% url "home" %}">Home</a>
+</main>
+{% else %}
+<main class="flex items-start gap-2 max-w-screen-lg mx-auto mt-4">
+    <div class="p-3 custom-shadow rounded-xl bg-white">
+        <a class="" href="{% url "home" %}"><i class="fa-solid fa-arrow-left fa-xl p-2 text-rose-500 border rounded-full hover:text-white hover:bg-rose-500"></i></a>
+        <h2 class="my-3">My Transactions</h2>
+        <table class="border-collapse w-full mx-auto text-center">
+            <thead class="">
+                <tr class="bg-rose-100">
+                    <th class="p-2 text-rose-900 rounded-l-md">Car Name</th>
+                    <th class="p-2 text-rose-900">Car Image</th>
+                    <th class="p-2 text-rose-900">Rental Date</th>
+                    <th class="p-2 text-rose-900">Return Date</th>
+                    <th class="p-2 text-rose-900">Rental Price</th>
+                    <th class="p-2 text-rose-900 rounded-r-md">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr class="border-solid border-b-2 border-b-gray-200">
+                    <td class="p-2">{{ transaction.car.car_type }}</td>
+                    <td class="p-2"><img class="w-52" src="{{ transaction.car.image.url }}" alt=""></td>
+                    <td class="p-2">{{ transaction.rental_date }}</td>
+                    <td class="p-2">{{ transaction.return_date }}</td>
+                    <td class="p-2">IDR {{ transaction.rental_price|intcomma }}</td>
+                    <td class="p-2">
+                        <div class="flex gap-3">
+                            <a href="{% url "delete_transaction" transaction.id %}"><i class="fa-solid fa-trash fa-xl text-rose-500"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="p-3 custom-shadow rounded-xl bg-white">
+        <p class="mb-0 font-bold">Total:</p>
+        <span class="inline-block my-2 text-lg">IDR {{ total_price|intcomma }}</span>
+        <a class="inline-block w-full bg-rose-500 hover:bg-rose-700 text-center no-underline text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" href="{% url "generate_bill" %}">Generate Bill</a>
+    </div>
+</main>
+{% endif %}
+
+{% endblock content %}

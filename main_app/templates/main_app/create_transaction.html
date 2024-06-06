@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+
+<main class="w-full max-w-xl mx-auto mt-4">
+  <form
+    class="bg-white custom-shadow rounded-xl px-8 pt-6 pb-8 mb-4"
+    action=""
+    method="post"
+  >
+    {% csrf_token %}
+    <div class="flex gap-3">
+        <div class="flex-1">
+            <label class="block text-gray-700 text-sm font-medium mb-2" for="car">Car</label>
+            <input class="appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 border-gray-300 leading-tight focus:outline-none focus:shadow-outline" type="text" name="car" id="car" value="{{ car.car_type }}" disabled>
+        </div>
+        <div class="flex-1">
+            <label class="block text-gray-700 text-sm font-medium mb-2" for="priceperday">Price per Day (Car)</label>
+            <input class="appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight border-gray-300 focus:outline-none focus:shadow-outline" type="number" name="priceperday" id="priceperday" value="{{ car.price }}" disabled>
+        </div>
+    </div>
+    <div class="flex gap-3 mb-3">
+        <div class="flex-1" id="htmlTarget">
+            <label for="datetimepicker1Input" class="form-label">Rental Date</label>
+            <div
+              class="input-group log-event"
+              id="datetimepicker1"
+              data-td-target-input="nearest"
+              data-td-target-toggle="nearest"
+            >
+              <input
+                name="rentaldate"
+                id="datetimepicker1Input"
+                type="text"
+                class="form-control"
+                data-td-target="#datetimepicker1"
+                required
+              />
+              <span
+                class="input-group-text"
+                data-td-target="#datetimepicker1"
+                data-td-toggle="datetimepicker"
+              >
+                <i class="fas fa-calendar"></i>
+              </span>
+            </div>
+        </div>
+        <div class="flex-1">
+            <label for="datetimepicker2Input" class="form-label">Return Date</label>
+            <div
+              class="input-group log-event"
+              id="datetimepicker2"
+              data-td-target-input="nearest"
+              data-td-target-toggle="nearest"
+            >
+              <input
+                name="returndate"
+                id="datetimepicker2Input"
+                type="text"
+                class="form-control"
+                data-td-target="#datetimepicker2"
+                required
+              />
+              <span
+                class="input-group-text"
+                data-td-target="#datetimepicker2"
+                data-td-toggle="datetimepicker"
+              >
+                <i class="fas fa-calendar"></i>
+              </span>
+            </div>
+        </div>
+    </div>
+    <div class="w-1/2">
+        <label class="block text-gray-700 text-sm font-medium mb-2" for="rentalprice">Price</label>
+        <input style="width: 248px;" class="appearance-none border-gray-300 rounded py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="number" name="rentalprice" id="rentalprice" required>
+    </div>
+    <div class="flex gap-3 mt-4">
+        <a class="inline-block bg-gray-200 text-black font-bold py-2 px-4 rounded no-underline" href="{% url "home" %}">Cancel</a>
+        <button
+          class="bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+        >
+          Rent Now
+        </button>
+    </div>
+  </form>
+</main>
+
+{% endblock content %}
+
+{% block datetimescript %}
+<script src="{% static "js/datetimepicker.js" %}"></script>
+{% endblock datetimescript %}

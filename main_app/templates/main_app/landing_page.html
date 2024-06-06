@@ -1,0 +1,36 @@
+{% extends "main.html" %} {% block content %} {% load static %}
+
+<main class="max-w-6xl grid grid-cols-2 mx-auto my-4 px-4">
+  <div class="">
+    <div class="mb-5">
+      <h1 class="mb-5 text-7xl font-bold">Buy Your Dream Car</h1>
+      <p>
+        If you're ready to take your UI Motion Design skills to the next level
+        and join a dynamic and growing team
+      </p>
+    </div>
+    <a
+      class="inline-block bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded"
+      href="#"
+      >Learn More</a
+    >
+  </div>
+  <div class="text-white">
+    <div class="flex flex-row-reverse">
+      <div class="flex gap-4 p-4 bg-rose-500 rounded-md">
+        <div>
+          <h4 class="text-4xl font-bold">2.6K</h4>
+          <p>People Trusted<br />Our Company</p>
+        </div>
+        <div class="flex gap-1 items-end">
+          <span class="inline-block w-4 h-4 rounded-full bg-green-400"></span>
+          <span class="inline-block w-4 h-4 rounded-full bg-yellow-400"></span>
+          <span class="inline-block w-4 h-4 rounded-full bg-blue-400"></span>
+        </div>
+      </div>
+    </div>
+    <div><img src="{% static "images/main-car.png" %}" alt=""></div>
+  </div>
+</main>
+
+{% endblock content %}

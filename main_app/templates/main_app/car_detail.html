@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+
+{% block content %}
+
+<main class="flex gap-4 max-w-3xl mx-auto mt-4 custom-shadow rounded-xl p-7 bg-white">
+    <div class="flex flex-1 flex-col justify-between items-start">
+        <a class="" href="{% url "home" %}"><i class="fa-solid fa-arrow-left fa-xl p-2 text-rose-500 border rounded-full hover:text-white hover:bg-rose-500"></i></a>
+        <img src="{{ car.image.url }}" alt="car-image">
+        <div class="flex justify-between">
+            <span class="inline-block p-2 text-sm font-medium rounded-md bg-green-200">{{ car.status }}</span>
+            <p class="mb-0 text-xl font-bold">IDR {{ car.price|intcomma }}<span class="text-sm font-normal">/Day</span></p>
+        </div>
+    </div>
+    <div class="flex-1">
+        <h3 class="text-4xl font-bold">{{ car.brand }} {{ car.car_type }}</h3>
+        <div class="mt-3">
+            <h4 class="mb-2">Car Specs</h4>
+            <div class="flex gap-3">
+                <div class="w-28 p-2 border-gray-100 border-2 rounded-md">
+                    <p class="mb-1 text-sm text-gray-500">Max. Power</p>
+                    <p class="mb-1 text-xl font-medium">320</p>
+                    <span class="text-sm text-gray-400">hp</span>
+                </div>
+                <div class="w-28 p-2 border-gray-100 border-2 rounded-md">
+                    <p class="mb-1 text-sm text-gray-500">Top Speed</p>
+                    <p class="mb-1 text-xl font-medium">177</p>
+                    <span class="text-sm text-gray-400">mph</span>
+                </div>
+            </div>
+        </div>
+        <div class="my-3">
+            <h4 class="mb-2">Car Info</h4>
+            <div class="flex gap-3">
+                <span><i class="fa-solid fa-user fa-xl text-rose-500"></i> {{ car. }} Passengers</span>
+                <span><i class="fa-solid fa-car fa-xl text-rose-500"></i> {{ car.transmission }}</span>
+            </div>
+        </div>
+        {% if car.status == "available" %}
+        <a class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-rose-500 no-underline !rounded-md" href="{% url "create_transaction" car.id %}">Rent Now</a>
+        {% else %}
+        <a class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-gray-500 no-underline !rounded-md" href="#">Rent Now</a>
+        {% endif %}
+    </div>
+</main>
+
+{% endblock content %}

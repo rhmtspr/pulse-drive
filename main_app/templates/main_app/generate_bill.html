@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load humanize %}
+
+{% block navbar %}
+{% endblock navbar %}
+
+{% block content %}
+    <main class="h-screen">
+        <div class="h-screen p-3 border-gray-100 bg-white">
+                <ul class="p-0">
+                    <li>Juanda 10, Samarinda</li>
+                    <li>085724121028</li>
+                    <li>Mobilku.com</li>
+                </ul>
+            <div>
+                <h5>Date: {{ current_date }}</h5>
+                <h5>Customer Name:</h5>
+                <p>{{ username }}</p>
+                <table class="w-full p-2 border-2">
+                    <thead>
+                        <tr class="">
+                            <th class="p-2 border-solid border-2 border-gray-900">Car</th>
+                            <th class="p-2 border-solid border-2 border-gray-900">Rental Date</th>
+                            <th class="p-2 border-solid border-2 border-gray-900">Return Date</th>
+                            <th class="p-2 border-solid border-2 border-gray-900">Price</th>
+                        </tr>
+                    </thead>
+                    {% for transaction in transactions %}
+                    <tr class="border-solid border-2">
+                        <td class="p-2 border-solid border-2 border-gray-900">{{ transaction.car.brand }} {{ transaction.car.car_type }}</td>
+                        <td class="p-2 border-solid border-2 border-gray-900">{{ transaction.rental_date }}</td>
+                        <td class="p-2 border-solid border-2 border-gray-900">{{ transaction.return_date }}</td>
+                        <td class="p-2 border-solid border-2 border-gray-900">IDR {{ transaction.rental_price|intcomma }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <p>Total: IDR {{ total_price|intcomma }}</p>
+                <p class="text-center">Thank you for you purchase!</p>
+            </div>
+            <a class="inline-block bg-rose-500 hover:bg-rose-700 text-center no-underline text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" href="{% url "pdf_report" %}">Create</a>
+        </div>
+    </main>
+{% endblock content %}
