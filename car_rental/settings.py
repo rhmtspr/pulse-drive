@@ -40,7 +40,7 @@ NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-secondary',
     messages.INFO: 'alert-info',
-    messages.SUCCESS: 'alert-success',
+    messages.SUCCESS: 'success',
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
