@@ -32,7 +32,7 @@
             </div>
             <div class="!flex !justify-between !items-center">
                 {% if car.status == "available" %}
-                <a style="text-decoration: none;" class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-rose-500 !rounded-md" href="{% url "create_transaction" car.id %}">Rent Now</a>
+                <a style="text-decoration: none;" class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-violet-500 !rounded-md" href="{% url "create_transaction" car.id %}">Rent Now</a>
                 {% else %}
                 <a style="text-decoration: none;" class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-gray-500 !rounded-md" href="#">Rent</a>
                 {% endif %}

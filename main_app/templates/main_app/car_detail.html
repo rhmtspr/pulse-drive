@@ -6,9 +6,9 @@
 
 <main class="flex gap-4 max-w-3xl mx-auto mt-4 custom-shadow rounded-xl p-7 bg-white">
     <div class="flex flex-1 flex-col justify-between items-start">
-        <a class="" href="{% url "home" %}"><i class="fa-solid fa-arrow-left fa-xl p-2 text-rose-500 border rounded-full hover:text-white hover:bg-rose-500"></i></a>
+        <a class="" href="{% url "home" %}"><i class="fa-solid fa-arrow-left fa-xl p-2 text-violet-500 border rounded-full hover:text-white hover:bg-violet-500"></i></a>
         <img src="{{ car.image.url }}" alt="car-image">
-        <div class="flex justify-between">
+        <div class="flex justify-between w-full">
             <span class="inline-block p-2 text-sm font-medium rounded-md bg-green-200">{{ car.status }}</span>
             <p class="mb-0 text-xl font-bold">IDR {{ car.price|intcomma }}<span class="text-sm font-normal">/Day</span></p>
         </div>
@@ -33,12 +33,12 @@
         <div class="my-3">
             <h4 class="mb-2">Car Info</h4>
             <div class="flex gap-3">
-                <span><i class="fa-solid fa-user fa-xl text-rose-500"></i> {{ car. }} Passengers</span>
-                <span><i class="fa-solid fa-car fa-xl text-rose-500"></i> {{ car.transmission }}</span>
+                <span><i class="fa-solid fa-user fa-xl text-violet-500"></i> {{ car. }} Passengers</span>
+                <span><i class="fa-solid fa-car fa-xl text-violet-500"></i> {{ car.transmission }}</span>
             </div>
         </div>
         {% if car.status == "available" %}
-        <a class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-rose-500 no-underline !rounded-md" href="{% url "create_transaction" car.id %}">Rent Now</a>
+        <a class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-violet-500 no-underline !rounded-md" href="{% url "create_transaction" car.id %}">Rent Now</a>
         {% else %}
         <a class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-gray-500 no-underline !rounded-md" href="#">Rent Now</a>
         {% endif %}
