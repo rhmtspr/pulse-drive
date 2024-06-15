@@ -1,6 +1,6 @@
 import os
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Car, Transaction
@@ -11,9 +11,6 @@ from xhtml2pdf import pisa
 from datetime import datetime
 
 from datetime import datetime
-
-def landing_page(request):
-    return render(request, "main_app/landing_page.html")
 
 @login_required
 def home(request):
@@ -90,21 +87,15 @@ def transaction_detail(request):
 
 @login_required
 def delete_transaction(request, transaction_id):
-    transaction = Transaction.objects.get(pk=transaction_id)
-    car = transaction.car
-
-    if request.method == "POST":
+    try:
+        transaction = Transaction.objects.get(id=transaction_id)
+        car = transaction.car
         car.status = "available"
         car.save()
         transaction.delete()
-        messages.info(request, "You've successfully deleted transaction")
         return redirect("transaction_detail")
-    
-    context = {
-        "transaction": transaction
-    }
-
-    return render(request, "main_app/delete_transaction.html", context)
+    except:
+        return HttpResponseNotFound("Transaction not found")
 
 @login_required
 def generate_bill(request):
