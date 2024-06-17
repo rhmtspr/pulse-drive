@@ -35,3 +35,12 @@ class Transaction(models.Model):
     rental_price = models.IntegerField(blank=True, null=True)
     rental_date = models.DateTimeField()
     return_date = models.DateTimeField()
+
+class Reviews(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Reviews"

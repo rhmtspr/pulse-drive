@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<main class="flex gap-4 max-w-3xl mx-auto mt-4 custom-shadow rounded-xl p-7 bg-white">
+<main class="flex gap-4 max-w-[1120px] mx-auto mt-4 custom-shadow rounded-xl p-7 bg-white">
     <div class="flex flex-1 flex-col justify-between items-start">
         <a class="" href="{% url "home" %}"><i class="fa-solid fa-arrow-left fa-xl p-2 text-violet-500 border rounded-full hover:text-white hover:bg-violet-500"></i></a>
         <img src="{{ car.image.url }}" alt="car-image">
@@ -37,12 +37,16 @@
                 <span><i class="fa-solid fa-car fa-xl text-violet-500"></i> {{ car.transmission }}</span>
             </div>
         </div>
-        {% if car.status == "available" %}
-        <a class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-violet-500 no-underline !rounded-md" href="{% url "create_transaction" car.id %}">Rent Now</a>
-        {% else %}
-        <a class="block w-full !py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-gray-500 no-underline !rounded-md" href="#">Rent Now</a>
-        {% endif %}
+        <div class="flex gap-3">
+          {% if car.status == "available" %}
+          <a class="!py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-violet-500 no-underline !rounded-md" href="{% url "create_transaction" car.id %}">Rent Now</a>
+          {% else %}
+          <a class="!py-2 !px-4 !text-sm text-center !text-white !font-medium !bg-gray-500 no-underline !rounded-md" href="#">Rent Now</a>
+          {% endif %}
+        </div>
     </div>
 </main>
+
+{% include "main_app/car_review.html" %}
 
 {% endblock content %}

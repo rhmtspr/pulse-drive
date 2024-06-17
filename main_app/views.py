@@ -1,9 +1,7 @@
-import os
-from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Car, Transaction
+from .models import Car, Transaction, Reviews
 from django.contrib import messages
 from customer.models import Customer
 from django.template.loader import get_template
@@ -25,9 +23,26 @@ def home(request):
 @login_required
 def car_detail(request, car_id):
     car = Car.objects.get(pk=car_id)
+    reviews = Reviews.objects.filter(car=car)
+
+    if request.method == "POST":
+        review_content = request.POST.get("review")
+        review_obj = Reviews.objects.create(
+            user=request.user,
+            car=car,
+            content=review_content
+        )
+
+        review_obj.save()
+
+        messages.success(request, "Review has been created")
+
+        return redirect("car_detail", car_id=car_id)
 
     context = {
-        "car": car
+        "car": car,
+        "reviews": reviews,
+
     }
 
     return render(request, "main_app/car_detail.html", context)
