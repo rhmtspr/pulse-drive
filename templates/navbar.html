@@ -28,7 +28,7 @@
           <!-- logo -->
           <div>
             <a
-              href="#"
+              href="{% url "home" %}"
               class="text-violet-700 font-bold text-xl no-underline"
             >
               PulseDrive
@@ -90,7 +90,7 @@
             >
               <!-- Active: "bg-gray-100", Not Active: "" -->
               <a
-              href="dashboard"
+              href="{% url "user_reviews" %}"
               class="block px-4 py-2 text-sm !no-underline text-gray-700"
               role="menuitem"
               tabindex="-1"

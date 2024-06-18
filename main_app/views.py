@@ -47,6 +47,24 @@ def car_detail(request, car_id):
 
     return render(request, "main_app/car_detail.html", context)
 
+@login_required
+def user_reviews(request):
+    reviews = Reviews.objects.filter(user=request.user)
+
+    context = {
+        "reviews": reviews
+    }
+
+    return render(request, "main_app/user_reviews.html", context)
+
+@login_required
+def delete_review(request, review_id):
+    try:
+        review = Reviews.objects.get(id=review_id)
+        review.delete()
+        return redirect("user_reviews")
+    except:
+        return HttpResponseNotFound("Review not found")
 
 @login_required
 def create_transaction(request, car_id):

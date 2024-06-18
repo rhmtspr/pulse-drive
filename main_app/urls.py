@@ -6,6 +6,8 @@ from . import views
 urlpatterns = [
     path("", views.home, name="home"),
     path("car_detail/<int:car_id>", views.car_detail, name="car_detail"),
+    path("reviews/", views.user_reviews, name="user_reviews"),
+    path("delete_review/<int:review_id>", views.delete_review, name="delete_review"),
     path("transaction/<int:car_id>", views.create_transaction, name="create_transaction"),
     path("transaction_detail/", views.transaction_detail, name="transaction_detail"),
     path("delete_transaction/<int:transaction_id>", views.delete_transaction, name="delete_transaction"),
